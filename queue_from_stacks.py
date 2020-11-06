@@ -86,6 +86,3 @@ for value in [1, 2, 3, 4, 5]:
             print(q.dequeue(), q)
         except Exception as e:
             print("No elements in queue", type(e))
-
-
-

@@ -138,4 +138,3 @@ while not s.is_empty():
         print(s.get_max())
     except Exception as e:
         print(type(e))
-

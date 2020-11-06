@@ -393,4 +393,3 @@ if __name__ == '__main__':
             print(" --- OK: ", list.slice(index, size))
         except:
             print(" --- exception occurred.")
-
