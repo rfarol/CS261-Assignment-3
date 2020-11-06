@@ -1,7 +1,7 @@
 # Course: CS261 - Data Structures
 # Student Name: Ryan Farol
 # Assignment: Assignment 3 CDLL
-# Description: CDLL class has multiple functions
+# Description:
 
 
 class CDLLException(Exception):
@@ -237,11 +237,79 @@ class CircularList:
         pass
 
     def swap_pairs(self, index1: int, index2: int) -> None:
-        pass
+        if index1 < 0 or index2 < 0 or index1 > self.length() - 1 or index2 > self.length() - 1:
+            raise CDLLException # checks if the indexes are valid
+
+        if index1 == index2: # if indexes are the same, return the same list
+            return
+
+        # Checks if both indexes are next to each other. We have to use a special method to move one node at time
+        # so the links do not get stuck in an infinite loop. This is the check if the nodes need to move one place to
+        # the right
+        if index1 + 1 == index2:
+            counter_index = 0 # initialize index counter
+            current_node = self.sentinel.next # initialize head of the list
+            prev_node = self.sentinel # set a previous point
+            while counter_index != index1: # iterate until index is met
+                current_node = current_node.next
+                prev_node = prev_node.next
+                counter_index += 1
+            holder = current_node.next # Store node
+            current_node.next = holder.next # set new link to surrounding nodes
+            holder.next = current_node # point link back at the current node
+            prev_node.next = holder # swap nodes
+            return
+
+        # this checks both indexes are next to each other and if the first index needs to be move to the left
+        if index1 - 1 == index2:
+            counter_index = 0 # initialize index counter
+            current_node = self.sentinel.next # initialize head of the list
+            prev_node = self.sentinel
+            while counter_index != index2:  # iterate until index is met. NOW USE INDEX 2 instead of index 1
+                current_node = current_node.next
+                prev_node = prev_node.next
+                counter_index += 1
+            holder = current_node.next
+            current_node.next = holder.next
+            holder.next = current_node
+            prev_node.next = holder
+            return
+
+        # finally, below will set two node pointers for index 1 and index 2. Both were iterate through the list until
+        # their indexes are met. The previous and next nodes of the current pointers will be stored and then each pointer
+        # will swap nodes and re-establish directions from the nodes next to them.
+        else:
+            counter_index1 = 0 # set counter index 1
+            node1 = self.sentinel.next # set pointer to head of list
+            while counter_index1 != index1: # iterate until index is met
+                node1 = node1.next
+                counter_index1 += 1
+            prev_node1 = node1.prev # initialize the previous node on current pointer
+            next_node1 = node1.next # initialize the next node on current pointer
+
+            counter_index2 = 0 # set counter 2
+            node2 = self.sentinel.next # set pointer to head of list
+            while counter_index2 != index2:
+                node2 = node2.next
+                counter_index2 += 1
+            prev_node2 = node2.prev # initialize the previous node on current node 2
+            next_node2 = node2.next # initialize the next node on current node 2
+
+            prev_node1.next = node2 # establish link with next node 1 to current node 2
+            next_node1.prev = node2 # establish link with previous node 1 to current node 2
+            prev_node2.next = node1 # establish link with next node 2 to current node 1
+            next_node2.prev = node1 # establish link with previous node 2 to current node 1
+
+            node1.prev = prev_node2 # swap node 1 to node 2
+            node1.next = next_node2
+            node2.prev = prev_node1 # swap node 2 to node 1
+            node2.next = next_node1
+            return
+
 
     def reverse(self) -> None:
-        if self.is_empty() == True:
-            raise CDLLException
+        if self.is_empty() == True or self.length() == 1:
+            return
         pass
 
     def sort(self) -> None:
