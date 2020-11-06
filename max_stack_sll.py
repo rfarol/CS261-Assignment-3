@@ -1,7 +1,8 @@
 # Course: CS261 - Data Structures
-# Student Name:
-# Assignment:
-# Description:
+# Student Name: Ryan Farol
+# Assignment: Assignment 3 Max Stack Sll
+# Description: The MaxStack class has 4 methods: pop, push, top, and get_max. Each method deals with the single linked
+# class which is imported
 
 
 from sll import *
@@ -50,27 +51,35 @@ class MaxStack:
     # ------------------------------------------------------------------ #
 
     def push(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """push function takes the add_front function and pushes it to the top of the stack or head of the list"""
+        return self.sll_val.add_front(value)
         pass
 
     def pop(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """pop function would remove the top node front the stack or head of the list"""
+        if self.sll_val.is_empty():
+            raise StackException
+        else:
+            head_value = self.sll_val.get_front()
+            self.sll_val.remove_front()
+            return head_value
         pass
 
     def top(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """top function would returns the value from the top of the stack"""
+        if self.sll_val.is_empty():
+            raise StackException
+        else:
+            head_value = self.sll_val.get_front()
+            return head_value
         pass
 
     def get_max(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """get_max function returns the value that max value that is recently stored which is the size of the stack"""
+        if self.sll_val.is_empty():
+            raise StackException
+        else:
+            return self.size()
         pass
 
 
@@ -78,56 +87,55 @@ class MaxStack:
 if __name__ == "__main__":
     pass
 
-    # print('\n# push example 1')
-    # s = MaxStack()
-    # print(s)
-    # for value in [1, 2, 3, 4, 5]:
-    #     s.push(value)
-    # print(s)
-    #
-    #
-    # print('\n# pop example 1')
-    # s = MaxStack()
-    # try:
-    #     print(s.pop())
-    # except Exception as e:
-    #     print("Exception:", type(e))
-    # for value in [1, 2, 3, 4, 5]:
-    #     s.push(value)
-    # for i in range(6):
-    #     try:
-    #         print(s.pop())
-    #     except Exception as e:
-    #         print("Exception:", type(e))
-    #
-    #
-    # print('\n# top example 1')
-    # s = MaxStack()
-    # try:
-    #     s.top()
-    # except Exception as e:
-    #     print("No elements in stack", type(e))
-    # s.push(10)
-    # s.push(20)
-    # print(s)
-    # print(s.top())
-    # print(s.top())
-    # print(s)
-    #
-    # print('\n# get_max example 1')
-    # s = MaxStack()
-    # for value in [1, -20, 15, 21, 21, 40, 50]:
-    #     print(s, ' ', end='')
-    #     try:
-    #         print(s.get_max())
-    #     except Exception as e:
-    #         print(type(e))
-    #     s.push(value)
-    # while not s.is_empty():
-    #     print(s.size(), end='')
-    #     print(' Pop value:', s.pop(), ' get_max after: ', end='')
-    #     try:
-    #         print(s.get_max())
-    #     except Exception as e:
-    #         print(type(e))
+print('\n# push example 1')
+s = MaxStack()
+print(s)
+for value in [1, 2, 3, 4, 5]:
+    s.push(value)
+print(s)
+
+print('\n# pop example 1')
+s = MaxStack()
+try:
+    print(s.pop())
+except Exception as e:
+    print("Exception:", type(e))
+for value in [1, 2, 3, 4, 5]:
+    s.push(value)
+for i in range(6):
+    try:
+        print(s.pop())
+    except Exception as e:
+        print("Exception:", type(e))
+
+
+print('\n# top example 1')
+s = MaxStack()
+try:
+    s.top()
+except Exception as e:
+    print("No elements in stack", type(e))
+s.push(10)
+s.push(20)
+print(s)
+print(s.top())
+print(s.top())
+print(s)
+
+print('\n# get_max example 1')
+s = MaxStack()
+for value in [1, -20, 15, 21, 21, 40, 50]:
+    print(s, ' ', end='')
+    try:
+        print(s.get_max())
+    except Exception as e:
+        print(type(e))
+    s.push(value)
+while not s.is_empty():
+    print(s.size(), end='')
+    print(' Pop value:', s.pop(), ' get_max after: ', end='')
+    try:
+        print(s.get_max())
+    except Exception as e:
+        print(type(e))
 

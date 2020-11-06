@@ -229,7 +229,6 @@ class LinkedList:
                 prev_pointer.next = curr_pointer.next
                 return True
             return False
-
         pass
 
     def count(self, value: object) -> int:
