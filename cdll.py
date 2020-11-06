@@ -1,7 +1,7 @@
 # Course: CS261 - Data Structures
 # Student Name: Ryan Farol
 # Assignment: Assignment 3 CDLL
-# Description:
+# Description: CDLL class has multiple functions
 
 
 class CDLLException(Exception):
