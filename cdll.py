@@ -208,7 +208,7 @@ class CircularList:
             return True
         else:
             curr_pointer = self.sentinel.next  # initialize current position
-            prev_pointer = 0  # intialize a previous position variable
+            prev_pointer = 0  # initialize a previous position variable
             # while the current position does not equal the value, it moves throughout the list
             while curr_pointer.value != None and curr_pointer.value != value:
                 prev_pointer = curr_pointer
@@ -237,7 +237,7 @@ class CircularList:
         pass
 
     def swap_pairs(self, index1: int, index2: int) -> None:
-        if index1 < 0 or index2 < 0 or index1 > self.length() - 1 or index2 > self.length() - 1:
+        if index1 < 0 or index2 < 0 or index1 > self.length() - 1 or index2 > self.length() - 1 or self.is_empty() == True:
             raise CDLLException # checks if the indexes are valid
 
         if index1 == index2: # if indexes are the same, return the same list
@@ -281,7 +281,7 @@ class CircularList:
         else:
             counter_index1 = 0 # set counter index 1
             node1 = self.sentinel.next # set pointer to head of list
-            while counter_index1 != index1: # iterate until index is met
+            while counter_index1 != index1: # traverse until index is met
                 node1 = node1.next
                 counter_index1 += 1
             prev_node1 = node1.prev # initialize the previous node on current pointer
@@ -306,9 +306,31 @@ class CircularList:
             node2.next = next_node1
             return
 
+    def helper_swap_pairs(self, index1, index2):
+        return self.swap_pairs(index1, index2)
 
     def reverse(self) -> None:
         if self.is_empty() == True or self.length() == 1:
+            return
+        if self.length() % 2 == 0:
+            counter = self.length() / 2
+            front_index = 0
+            last_index = self.length() - 1
+            while counter != 0:
+                self.helper_swap_pairs(front_index, last_index)
+                last_index = last_index - 1
+                front_index = front_index + 1
+                counter = counter - 1
+            return
+        else:
+            counter = (self.length() - 1)/2
+            front_index = 0
+            last_index = self.length() - 1
+            while counter != 0:
+                self.helper_swap_pairs(front_index, last_index)
+                last_index = last_index - 1
+                front_index = front_index + 1
+                counter = counter - 1
             return
         pass
 
@@ -483,12 +505,12 @@ class Student:
         return str(self.name) + ' ' + str(self.age)
 
 
-    s1, s2 = Student('John', 20), Student('Andy', 20)
-    lst = CircularList([s1, s2])
-    print(lst)
-    lst.reverse()
-    print(lst)
-    print(s1 == s2)
+s1, s2 = Student('John', 20), Student('Andy', 20)
+lst = CircularList([s1, s2])
+print(lst)
+lst.reverse()
+print(lst)
+print(s1 == s2)
 
 print('\n# reverse example 4')
 lst = CircularList([1, 'A'])
