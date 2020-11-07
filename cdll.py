@@ -1,7 +1,10 @@
 # Course: CS261 - Data Structures
 # Student Name: Ryan Farol
 # Assignment: Assignment 3 CDLL
-# Description:
+# Description:  Cicular Doubly Linked List class has the same functions as the Singly Linked List class minus the slice.
+# There are a couple of new functions added. However the rotate and odd_even functions are not complete/invalid.
+# I did not know how to get them working. I tried to document my thought process with  on how my code would work, but
+# ultimately ran out of time.
 
 
 class CDLLException(Exception):
@@ -367,24 +370,75 @@ class CircularList:
     pass
 
     def rotate(self, steps: int) -> None:
-        pass
+        """rotate function is supposed to take the steps and move the list to how many spots. My function is supposed
+        to follow a step counter and consistently swap sports from right or left until the counter is met. """
+
+        # Tried my best on this one. Didn't get it to work at all.
+        if self.is_empty() == True or steps == 0:
+            return
+        if steps > 0 and steps > self.length(): # checks if steps are positive
+            steps = steps % self.length() # use the mod operator to trim down the steps
+            counter = 0 # set step counter
+            front_index = 0
+            last_index = 1
+            while counter != steps:
+                if last_index == self.length() -1: # once end of the list is reached, reset index
+                    last_index = 0
+                if front_index == self.length() - 1: # once end of the list is reached, reset index
+                    front_index = 0
+                self.helper_swap_pairs(last_index, front_index) # keep swapping until counter is met
+                last_index = last_index + 1
+                front_index = front_index + 1
+                counter = counter + 1 # increment
+            if steps < 0 and steps > self.length():  # checks if steps are positive
+                steps = abs(steps) % self.length()  # use the mod operator to trim down the steps
+                counter = 0  # set step counter
+                front_index = 0
+                last_index = 1
+                while counter != steps:
+                    if last_index == self.length() - 1:  # once end of the list is reached, reset index
+                        last_index = 0
+                    if front_index == self.length() - 1:  # once end of the lsit is reached, reset index
+                        front_index = 0
+                    self.helper_swap_pairs(front_index, last_index)  # reverse switch to mimic backwards movement
+                    last_index = last_index + 1
+                    front_index = front_index + 1
+                    counter = counter + 1  # increment
+            return
 
     def remove_duplicates(self) -> None:
+        """remove_duplicates function iterates through the whole list and removes the dupliaces of each list. I was only
+        able to figure out how to remove ONE duplicate, not all the values. I used a very similar method to remove at index,
+        but if I try to restablish the links, my code ends up on an infinite loop."""
         if self.is_empty() == True:
             return
-        curr_pointer = self.sentinel.next
-        while curr_pointer.next != self.sentinel:
-            if curr_pointer.value == curr_pointer.next.value:
-                curr_pointer.next.next.prev = curr_pointer.next.prev
+        curr_pointer = self.sentinel.next # set head node
+        while curr_pointer.next != self.sentinel: # iterate until the end
+            if curr_pointer.value == curr_pointer.next.value: # if the values equal each other
+                curr_pointer.next.next.prev = curr_pointer.next.prev # remove the node and fix the links
                 curr_pointer.next.prev.next = curr_pointer.next.next
             else:
-                curr_pointer = curr_pointer.next
+                curr_pointer = curr_pointer.next # if values dont match, move forward
         pass
 
     def odd_even(self) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """odd_even function checks if the list is empty or if there only one node within the list, it returns.
+        If not, index is initialized at the beginning of the list. The list is then iterated through. Since it is
+        sorted, checks if current node is even, and the previous node is odd. If true, move the even nodes to the left.
+        Once the list is sorted, all the even nodes will end on the left"""
+        if self.is_empty() == True or self.length() == 1:  # checks if list is empty or only has one node
+            return
+        count = 3
+        front_index = 1 # set front index
+        prev_index = 0 # set last index
+        curr_pointer = self.sentinel
+        while curr_pointer.next != self.sentinel: # iterate throughout the list
+            if curr_pointer.value % 2 == 0 and curr_pointer.prev.value % 2 != 0: # checks if even or odd
+                self.helper_swap_pairs(front_index, prev_index) # calls swap pairs method
+            curr_pointer = curr_pointer.next # move along the list
+            prev_index = prev_index + 1 # increment
+            front_index = front_index + 1 # increment
+        return
         pass
 
 
@@ -521,8 +575,6 @@ if __name__ == '__main__':
     print(lst)
 
     print('\n# reverse example 3')
-
-
     class Student:
         def __init__(self, name, age):
             self.name, self.age = name, age
@@ -534,12 +586,12 @@ if __name__ == '__main__':
             return str(self.name) + ' ' + str(self.age)
 
 
-        s1, s2 = Student('John', 20), Student('Andy', 20)
-        lst = CircularList([s1, s2])
-        print(lst)
-        lst.reverse()
-        print(lst)
-        print(s1 == s2)
+    s1, s2 = Student('John', 20), Student('Andy', 20)
+    lst = CircularList([s1, s2])
+    print(lst)
+    lst.reverse()
+    print(lst)
+    print(s1 == s2)
 
     print('\n# reverse example 4')
     lst = CircularList([1, 'A'])
@@ -562,8 +614,8 @@ if __name__ == '__main__':
     source = [_ for _ in range(-20, 20, 7)]
     for steps in [1, 2, 0, -1, -2, 28, -100]:
         lst = CircularList(source)
-    lst.rotate(steps)
-    print(lst, steps)
+        lst.rotate(steps)
+        print(lst, steps)
 
     print('\n# rotate example 2')
     lst = CircularList([10, 20, 30, 40])
@@ -602,6 +654,6 @@ if __name__ == '__main__':
 
     for case in test_cases:
         lst = CircularList(case)
-    print('INPUT :', lst)
-    lst.odd_even()
-    print('OUTPUT:', lst)
+        print('INPUT :', lst)
+        lst.odd_even()
+        print('OUTPUT:', lst)
