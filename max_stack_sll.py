@@ -86,55 +86,54 @@ class MaxStack:
 # BASIC TESTING
 if __name__ == "__main__":
     pass
+    print('\n# push example 1')
+    s = MaxStack()
+    print(s)
+    for value in [1, 2, 3, 4, 5]:
+        s.push(value)
+    print(s)
 
-print('\n# push example 1')
-s = MaxStack()
-print(s)
-for value in [1, 2, 3, 4, 5]:
-    s.push(value)
-print(s)
-
-print('\n# pop example 1')
-s = MaxStack()
-try:
-    print(s.pop())
-except Exception as e:
-    print("Exception:", type(e))
-for value in [1, 2, 3, 4, 5]:
-    s.push(value)
-for i in range(6):
+    print('\n# pop example 1')
+    s = MaxStack()
     try:
         print(s.pop())
     except Exception as e:
         print("Exception:", type(e))
+    for value in [1, 2, 3, 4, 5]:
+        s.push(value)
+    for i in range(6):
+        try:
+            print(s.pop())
+        except Exception as e:
+            print("Exception:", type(e))
 
 
-print('\n# top example 1')
-s = MaxStack()
-try:
-    s.top()
-except Exception as e:
-    print("No elements in stack", type(e))
-s.push(10)
-s.push(20)
-print(s)
-print(s.top())
-print(s.top())
-print(s)
-
-print('\n# get_max example 1')
-s = MaxStack()
-for value in [1, -20, 15, 21, 21, 40, 50]:
-    print(s, ' ', end='')
+    print('\n# top example 1')
+    s = MaxStack()
     try:
-        print(s.get_max())
+        s.top()
     except Exception as e:
-        print(type(e))
-    s.push(value)
-while not s.is_empty():
-    print(s.size(), end='')
-    print(' Pop value:', s.pop(), ' get_max after: ', end='')
-    try:
-        print(s.get_max())
-    except Exception as e:
-        print(type(e))
+        print("No elements in stack", type(e))
+    s.push(10)
+    s.push(20)
+    print(s)
+    print(s.top())
+    print(s.top())
+    print(s)
+
+    print('\n# get_max example 1')
+    s = MaxStack()
+    for value in [1, -20, 15, 21, 21, 40, 50]:
+        print(s, ' ', end='')
+        try:
+            print(s.get_max())
+        except Exception as e:
+            print(type(e))
+        s.push(value)
+    while not s.is_empty():
+        print(s.size(), end='')
+        print(' Pop value:', s.pop(), ' get_max after: ', end='')
+        try:
+            print(s.get_max())
+        except Exception as e:
+            print(type(e))
