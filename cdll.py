@@ -411,7 +411,7 @@ if __name__ == '__main__':
     lst = CircularList()
     test_cases = [(0, 'A'), (0, 'B'), (1, 'C'), (3, 'D'), (-1, 'E'), (5, 'F')]
     for index, value in test_cases:
-    print('Insert of', value, 'at', index, ': ', end='')
+        print('Insert of', value, 'at', index, ': ', end='')
     try:
         lst.insert_at_index(index, value)
         print(lst)
@@ -422,18 +422,18 @@ if __name__ == '__main__':
     lst = CircularList([1, 2])
     print(lst)
     for i in range(3):
-    try:
-        lst.remove_front()
-        print('Successful removal', lst)
-    except Exception as e:\
-        print(type(e))
+        try:
+            lst.remove_front()
+            print('Successful removal', lst)
+        except Exception as e:\
+            print(type(e))
 
     print('\n# remove_back example 1')
     lst = CircularList()
     try:
-    lst.remove_back()
+        lst.remove_back()
     except Exception as e:\
-    print(type(e))
+        print(type(e))
     lst.add_front('Z')
     lst.remove_back()
     print(lst)
@@ -448,7 +448,7 @@ if __name__ == '__main__':
     lst = CircularList([1, 2, 3, 4, 5, 6])
     print(lst)
     for index in [0, 0, 0, 2, 2, -2]:
-    print('Removed at index:', index, ': ', end='')
+        print('Removed at index:', index, ': ', end='')
     try:
         lst.remove_at_index(index)
         print(lst)
@@ -464,9 +464,9 @@ if __name__ == '__main__':
     print(lst.get_front())
     lst.remove_back()
     try:
-    print(lst.get_front())
+        print(lst.get_front())
     except Exception as e:
-    print(type(e))
+        print(type(e))
 
     print('\n# get_back example 1')
     lst = CircularList([1, 2, 3])
@@ -480,7 +480,7 @@ if __name__ == '__main__':
     lst = CircularList([1, 2, 3, 1, 2, 3, 1, 2, 3])
     print(lst)
     for value in [7, 3, 3, 3, 3]:
-    print(lst.remove(value), lst.length(), lst)
+        print(lst.remove(value), lst.length(), lst)
 
     print('\n# count example 1')
     lst = CircularList([1, 2, 3, 1, 2, 2])
@@ -491,7 +491,7 @@ if __name__ == '__main__':
     test_cases = ((0, 6), (0, 7), (-1, 6), (1, 5), (4, 2), (3, 3), (1, 2), (2, 1))
 
     for i, j in test_cases:
-    print('Swap nodes ', i, j, ' ', end='')
+        print('Swap nodes ', i, j, ' ', end='')
     try:
         lst.swap_pairs(i, j)
         print(lst)
@@ -505,7 +505,7 @@ if __name__ == '__main__':
     ['A', 'B', 'C', 'D']
     )
     for case in test_cases:
-    lst = CircularList(case)
+        lst = CircularList(case)
     lst.reverse()
     print(lst)
 
@@ -524,22 +524,22 @@ if __name__ == '__main__':
 
 
     class Student:
-    def __init__(self, name, age):
-        self.name, self.age = name, age
+        def __init__(self, name, age):
+            self.name, self.age = name, age
 
-    def __eq__(self, other):
-        return self.age == other.age
+        def __eq__(self, other):
+            return self.age == other.age
 
-    def __str__(self):
-        return str(self.name) + ' ' + str(self.age)
+        def __str__(self):
+            return str(self.name) + ' ' + str(self.age)
 
 
-    s1, s2 = Student('John', 20), Student('Andy', 20)
-    lst = CircularList([s1, s2])
-    print(lst)
-    lst.reverse()
-    print(lst)
-    print(s1 == s2)
+        s1, s2 = Student('John', 20), Student('Andy', 20)
+        lst = CircularList([s1, s2])
+        print(lst)
+        lst.reverse()
+        print(lst)
+        print(s1 == s2)
 
     print('\n# reverse example 4')
     lst = CircularList([1, 'A'])
@@ -553,7 +553,7 @@ if __name__ == '__main__':
     [(1, 1), (20, 1), (1, 20), (2, 20)]
     )
     for case in test_cases:
-    lst = CircularList(case)
+        lst = CircularList(case)
     print(lst)
     lst.sort()
     print(lst)
@@ -561,16 +561,16 @@ if __name__ == '__main__':
     print('\n# rotate example 1')
     source = [_ for _ in range(-20, 20, 7)]
     for steps in [1, 2, 0, -1, -2, 28, -100]:
-    lst = CircularList(source)
+        lst = CircularList(source)
     lst.rotate(steps)
     print(lst, steps)
 
     print('\n# rotate example 2')
     lst = CircularList([10, 20, 30, 40])
     for j in range(-1, 2, 2):
-    for _ in range(3):
-        lst.rotate(j)
-        print(lst)
+        for _ in range(3):
+            lst.rotate(j)
+            print(lst)
 
     print('\n# rotate example 3')
     lst = CircularList()
@@ -587,7 +587,7 @@ if __name__ == '__main__':
     )
 
     for case in test_cases:
-    lst = CircularList(case)
+        lst = CircularList(case)
     print('INPUT :', lst)
     lst.remove_duplicates()
     print('OUTPUT:', lst)
@@ -601,7 +601,7 @@ if __name__ == '__main__':
     )
 
     for case in test_cases:
-    lst = CircularList(case)
+        lst = CircularList(case)
     print('INPUT :', lst)
     lst.odd_even()
     print('OUTPUT:', lst)
